@@ -12,6 +12,7 @@ export default function Project({
   description,
   tags,
   imageUrl,
+  link
 }: ProjectProps) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -21,6 +22,10 @@ export default function Project({
   const scaleProgess = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
   const opacityProgess = useTransform(scrollYProgress, [0, 1], [0.6, 1]);
 
+  const linkToProject = (link:string) => {
+    window.open(link, "_blank");
+  }
+
   return (
     <motion.div
       ref={ref}
@@ -28,6 +33,7 @@ export default function Project({
         scale: scaleProgess,
         opacity: opacityProgess,
       }}
+      onClick={() => linkToProject(link)}
       className="group mb-3 sm:mb-8 last:mb-0"
     >
       <section className="bg-gray-100 max-w-[42rem] border border-black/5 rounded-lg overflow-hidden sm:pr-8 relative sm:h-[20rem] hover:bg-gray-200 transition sm:group-even:pl-8 dark:text-white dark:bg-white/10 dark:hover:bg-white/20">

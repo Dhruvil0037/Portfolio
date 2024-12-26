@@ -66,6 +66,7 @@ export const projectsData = [
       "Developed a feature-rich online code editor supporting 10 languages and 5 customizable themes, creating a powerful coding environment.",
     tags: ["Next.js", "Zustand","Convex","Clerk", "LemonSqueezy","Tailwind CSS"],
     imageUrl: codrexik,
+    link: "https://codrexik.vercel.app",
   },
 ] as const;
 
