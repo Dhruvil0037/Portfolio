@@ -54,7 +54,7 @@ export const experiencesData = [
     description:
       "Currently working as an Associate Software Developer. Primarily focused on full-stack development using MERN stack and Next.js. Contributed to a notable project integrating React with Laravel, delivering a seamless and efficient user experience.",
     icon: React.createElement(FaReact),
-    date: "July 2024 - Present",
+    date: "July 2024 - January 2025",
   },
 ] as const;
 
@@ -68,6 +68,14 @@ export const projectsData = [
     imageUrl: codrexik,
     link: "https://codrexik.vercel.app",
   },
+  {
+    title: "Renotary",
+    description:
+      "A platform for providing notary services online. Developed a user-friendly interface for clients to book appointments and access services for both notaries and clients.",
+    tags: ["React", "Redux"],
+    imageUrl: codrexik,    
+    link: " ",
+  }
 ] as const;
 
 export const skillsData = [

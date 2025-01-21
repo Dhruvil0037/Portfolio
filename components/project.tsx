@@ -23,7 +23,7 @@ export default function Project({
   const opacityProgess = useTransform(scrollYProgress, [0, 1], [0.6, 1]);
 
   const linkToProject = (link:string) => {
-    window.open(link, "_blank");
+    if(link.trim() !== "") window.open(link, "_blank");
   }
 
   return (
