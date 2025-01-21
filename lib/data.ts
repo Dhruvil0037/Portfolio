@@ -3,6 +3,9 @@ import { CgWorkAlt } from "react-icons/cg";
 import { FaReact } from "react-icons/fa";
 import { LuGraduationCap } from "react-icons/lu";
 import codrexik from "@/public/codrexik.png";
+import Renotary from "@/public/Renotary.png";
+import Learnexik from "@/public/Learnexik.png";
+import Cormidect from "@/public/Cormidect.png";
 
 export const links = [
   {
@@ -54,19 +57,42 @@ export const experiencesData = [
     description:
       "Currently working as an Associate Software Developer. Primarily focused on full-stack development using MERN stack and Next.js. Contributed to a notable project integrating React with Laravel, delivering a seamless and efficient user experience.",
     icon: React.createElement(FaReact),
-    date: "July 2024 - Present",
+    date: "July 2024 - January 2025",
   },
 ] as const;
-
 
 export const projectsData = [
   {
     title: "Codrexik",
     description:
       "Developed a feature-rich online code editor supporting 10 languages and 5 customizable themes, creating a powerful coding environment.",
-    tags: ["Next.js", "Zustand","Convex","Clerk", "LemonSqueezy","Tailwind CSS"],
+    tags: ["Next.js", "Zustand", "Convex", "Clerk", "LemonSqueezy"],
     imageUrl: codrexik,
     link: "https://codrexik.vercel.app",
+  },
+  {
+    title: "Learnexik",
+    description:
+      "An online learning platform for students and teachers. Developed a feature-rich platform for students to access courses and for teachers to create and manage courses.",
+    tags: ["Mern Stack", "Redux"],
+    imageUrl: Learnexik,
+    link: "https://github.com/Dhruvil0037/Learnexik",
+  },
+  {
+    title: "Cormidect",
+    description:
+      "Cormidect is a web application offering seamless communication and collaboration through text, voice, and video chats, community creation, role management, and real-time interactions.",
+    tags: ["Next.js", "Zustand", "Socket.io", "Postgresql", "NeonDB"],
+    imageUrl: Cormidect,
+    link: "https://github.com/Dhruvil0037/Cormidect",
+  },
+  {
+    title: "Renotary",
+    description:
+      "A platform for providing notary services online. Developed a user-friendly interface for clients to book appointments and access services for both notaries and clients.",
+    tags: ["React", "Redux"],
+    imageUrl: Renotary,
+    link: " ",
   },
 ] as const;
 
@@ -74,7 +100,7 @@ export const skillsData = [
   "HTML",
   "CSS",
   "JavaScript",
-  "TypeScript",  
+  "TypeScript",
   "Tailwind CSS",
   "React",
   "Redux",
@@ -86,7 +112,7 @@ export const skillsData = [
   "Next.js",
   "Node.js",
   "Express",
-  "MongoDB",  
+  "MongoDB",
   "MySQL",
   "RESTful APIs",
   "GraphQL",
@@ -104,5 +130,5 @@ export const skillsData = [
   "Jest",
   "Convex",
   "Clerk",
-  "Firebase",          
+  "Firebase",
 ] as const;
