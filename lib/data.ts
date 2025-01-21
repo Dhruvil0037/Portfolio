@@ -119,7 +119,6 @@ export const skillsData = [
   "PHP",
   "Laravel",
   "Python",
-  "Django",
   "Git",
   "GitHub",
   "GitLab",
