@@ -1,133 +1,169 @@
 import React from "react";
 import { CgWorkAlt } from "react-icons/cg";
 import { FaReact } from "react-icons/fa";
-import { LuGraduationCap } from "react-icons/lu";
+import squadexa from "@/public/squadexa.png";
+import casa39 from "@/public/casa39.png";
+import dayzen from "@/public/dayzen.png";
+import kartipr from "@/public/kartipr.png";
+import soniandsoni from "@/public/soniandsoni.png";
 import codrexik from "@/public/codrexik.png";
-import Renotary from "@/public/Renotary.png";
-import Learnexik from "@/public/Learnexik.png";
 import Cormidect from "@/public/Cormidect.png";
+import Learnexik from "@/public/Learnexik.png";
+import Renotary from "@/public/Renotary.png";
 
 export const links = [
-  {
-    name: "Home",
-    hash: "#home",
-  },
-  {
-    name: "About",
-    hash: "#about",
-  },
-  {
-    name: "Projects",
-    hash: "#projects",
-  },
-  {
-    name: "Skills",
-    hash: "#skills",
-  },
-  {
-    name: "Experience",
-    hash: "#experience",
-  },
-  {
-    name: "Contact",
-    hash: "#contact",
-  },
+  { name: "Home", hash: "#home" },
+  { name: "About", hash: "#about" },
+  { name: "Projects", hash: "#projects" },
+  { name: "Skills", hash: "#skills" },
+  { name: "Experience", hash: "#experience" },
+  { name: "Contact", hash: "#contact" },
 ] as const;
 
 export const experiencesData = [
   {
-    title: "B.Tech in Information Technology",
-    location: "Ahmedabad, Gujarat, India",
-    description:
-      "Currently pursuing a Bachelor of Technology in Information Technology. Developed a strong foundation in software development and modern web technologies. Expected graduation in July 2025.",
-    icon: React.createElement(LuGraduationCap),
-    date: "2021 - Present",
-  },
-  {
     title: "Software Developer Intern",
     location: "Elsner Technologies, Ahmedabad, India",
     description:
-      "Worked on front-end development using React for 3 months, then transitioned to full-stack development with the MERN stack and Next.js. Gained hands-on experience delivering scalable and efficient solutions.",
+      "Front-end in React, then full-stack with MERN + Next.js. Delivered production features across multiple client projects.",
     icon: React.createElement(CgWorkAlt),
-    date: "January 2024 - July 2024",
+    date: "January 2024 – July 2024",
   },
   {
     title: "Associate Software Developer",
     location: "Elsner Technologies, Ahmedabad, India",
     description:
-      "Currently working as an Associate Software Developer. Primarily focused on full-stack development using MERN stack and Next.js. Contributed to a notable project integrating React with Laravel, delivering a seamless and efficient user experience.",
+      "Full-stack with MERN + Next.js. Led a large-scale React + Laravel integration for a key client.",
     icon: React.createElement(FaReact),
-    date: "July 2024 - January 2025",
+    date: "July 2024 – January 2025",
+  },
+  {
+    title: "Senior Full Stack Developer",
+    location: "Squadkin Technologies Pvt. Ltd., Ahmedabad, India",
+    description:
+      "Leading web & eCommerce development with React, Next.js, Node.js, and Python — building scalable solutions for global clients.",
+    icon: React.createElement(CgWorkAlt),
+    date: "April 2025 – Present",
   },
 ] as const;
 
 export const projectsData = [
   {
+    title: "Squadexa AI",
+    description:
+      "AI writing platform in 180+ countries. Built NLP pipelines with custom tokenisation, RAG models & LangChain. Features AI humaniser, plagiarism checker, AI detector & admin panel.",
+    tags: ["Next.js", "Python", "LangChain", "RAG", "NLP", "GSAP"],
+    imageUrl: squadexa,
+    link: "https://www.squadexa.ai",
+  },
+  {
+    title: "Casa39 AI Chatbot",
+    description:
+      "Conversational AI for an Italian eCommerce — full shopping journey from product discovery to checkout. Admin panel with lead gen, tracking & chatbot customisation.",
+    tags: ["Next.js", "Python", "NLP", "LangChain", "Admin Panel"],
+    imageUrl: casa39,
+    link: "https://www.casa39.it",
+  },
+  {
+    title: "Dayzen",
+    description:
+      "Solo-built HRMS + WMS combining Keka & Jira — attendance, payroll, leave, project tracking & warehouse ops. Full admin panel. Under active development.",
+    tags: ["React", "Node.js", "Express", "MySQL", "Tailwind CSS"],
+    imageUrl: dayzen,
+    link: "",
+  },
+  {
+    title: "KartIPR",
+    description:
+      "Marketplace to buy, sell & license IP — patents, copyrights & trademarks. Admin panel with listing management, lead tracking, analytics & blog CMS.",
+    tags: ["Next.js", "MySQL", "Zustand", "Tailwind CSS", "Framer Motion"],
+    imageUrl: kartipr,
+    link: "https://www.kartipr.com",
+  },
+  {
+    title: "Soni & Soni",
+    description:
+      "Legal services site with lawyer slot booking & Google Calendar 2-way sync. Admin panel for bookings, leads & content. SEO-optimised, performance-first.",
+    tags: ["Next.js", "MySQL", "Tailwind CSS", "Google Calendar API"],
+    imageUrl: soniandsoni,
+    link: "https://www.soniandsoni.legal",
+  },
+  {
     title: "Codrexik",
     description:
-      "Developed a feature-rich online code editor supporting 10 languages and 5 customizable themes, creating a powerful coding environment.",
+      "In-browser code editor supporting 10 languages & 5 themes with real-time execution and a polished developer experience.",
     tags: ["Next.js", "Zustand", "Convex", "Clerk", "LemonSqueezy"],
     imageUrl: codrexik,
     link: "https://codrexik.vercel.app",
   },
   {
-    title: "Learnexik",
-    description:
-      "An online learning platform for students and teachers. Developed a feature-rich platform for students to access courses and for teachers to create and manage courses.",
-    tags: ["Mern Stack", "Redux"],
-    imageUrl: Learnexik,
-    link: "https://github.com/Dhruvil0037/Learnexik",
-  },
-  {
     title: "Cormidect",
     description:
-      "Cormidect is a web application offering seamless communication and collaboration through text, voice, and video chats, community creation, role management, and real-time interactions.",
-    tags: ["Next.js", "Zustand", "Socket.io", "Postgresql", "NeonDB"],
+      "Real-time communication platform with text, voice & video, community creation, role management & live interactions.",
+    tags: ["Next.js", "Socket.io", "PostgreSQL", "Zustand"],
     imageUrl: Cormidect,
     link: "https://github.com/Dhruvil0037/Cormidect",
   },
   {
+    title: "Learnexik",
+    description:
+      "Full-stack LMS for students & teachers — course creation, management & structured content delivery.",
+    tags: ["MERN Stack", "Redux"],
+    imageUrl: Learnexik,
+    link: "https://github.com/Dhruvil0037/Learnexik",
+  },
+  {
     title: "Renotary",
     description:
-      "A platform for providing notary services online. Developed a user-friendly interface for clients to book appointments and access services for both notaries and clients.",
+      "Online notary services platform for booking appointments and managing client-notary workflows.",
     tags: ["React", "Redux"],
     imageUrl: Renotary,
-    link: " ",
+    link: "",
   },
 ] as const;
 
 export const skillsData = [
-  "HTML",
-  "CSS",
   "JavaScript",
   "TypeScript",
-  "Tailwind CSS",
   "React",
-  "Redux",
-  "Zustand",
-  "TanStack Query",
-  "Shadcn UI",
-  "Material UI",
-  "Framer Motion",
   "Next.js",
   "Node.js",
+  "Python",
+  "FastAPI",
   "Express",
-  "MongoDB",
-  "MySQL",
-  "RESTful APIs",
+  "Redux",
+  "Zustand",
+  "Socket.io",
   "GraphQL",
+  "RESTful APIs",
+  "Prisma ORM",
+  "MongoDB",
+  "PostgreSQL",
+  "MySQL",
+  "Three.js",
+  "TanStack Query",
+  "WebSockets",
   "PHP",
   "Laravel",
-  "Python",
+  "NumPy",
+  "Pandas",
+  "AI/ML",
+  "LangChain",
+  "Apache",
+  "HTML",
+  "CSS",
+  "Tailwind CSS",
+  "Framer Motion",
+  "GSAP",
+  "Shadcn UI",
+  "Material UI",
   "Git",
   "GitHub",
   "GitLab",
   "Docker",
   "SAAS Development",
-  "Socket.io",
-  "WebSockets",
   "Jest",
   "Convex",
   "Clerk",
-  "Firebase",
 ] as const;
+
