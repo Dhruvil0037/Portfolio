@@ -44,7 +44,14 @@ export default function About() {
         <span className="font-medium">
           Next.js, Node.js, Express, and PostgreSQL
         </span>
-        . I also work with Python, FastAPI, LangChain, and AI/ML integrations.
+        . I also work with Python, FastAPI, LangChain, and AI/ML integrations
+        — RAG pipelines, embeddings, vector databases, and LLM agents — and
+        own the full{" "}
+        <span className="font-medium">
+          CI/CD, Docker, and deployment pipeline
+        </span>{" "}
+        (Vercel & VPS) plus database migrations for the products I build
+        solo, like Dayzen.
       </p>
       <p>
         <span className="italic">When I&apos;m not coding</span>, I enjoy
