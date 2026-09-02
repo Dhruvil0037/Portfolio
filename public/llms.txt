@@ -1,0 +1,24 @@
+# Dhruvil Dhamecha
+
+> Senior Full Stack Developer at Squadkin Technologies Pvt. Ltd., Ahmedabad, India. 2+ years building production-grade web applications, AI-powered products, and real-time systems.
+
+## About
+- Role: Senior Full Stack Developer (April 2025 – Present, Squadkin Technologies Pvt. Ltd.)
+- Core stack: Next.js, React, Node.js, Express, PostgreSQL
+- Also works with: Python, FastAPI, LangChain, RAG pipelines, Socket.io, MongoDB, MySQL, GraphQL
+- Education: B.Tech in Information Technology, L.J. Institute of Engineering and Technology, Ahmedabad — CGPA 8.7
+- Location: Ahmedabad, Gujarat, India
+- Contact: dhruvildhamecha2003@gmail.com
+- LinkedIn: https://www.linkedin.com/in/dhruvil-dhamecha-14939b258/
+- GitHub: https://github.com/Dhruvil0037
+
+## Projects
+- Squadexa AI — AI writing platform used in 180+ countries, NLP/RAG/LangChain — https://www.squadexa.ai
+- Casa39 AI Chatbot — Conversational AI for an Italian eCommerce brand — https://www.casa39.it
+- Dayzen — Solo-built HRMS + WMS combining Keka and Jira (in development)
+- KartIPR — Marketplace to buy, sell, and license IP — https://www.kartipr.com
+- Soni & Soni — Legal services site with lawyer booking and Google Calendar sync — https://www.soniandsoni.legal
+- Codrexik — In-browser code editor, 10 languages, 5 themes — https://codrexik.vercel.app
+- Cormidect — Real-time chat/voice/video platform — https://github.com/Dhruvil0037/Cormidect
+- Learnexik — Full-stack LMS for students and teachers — https://github.com/Dhruvil0037/Learnexik
+- Renotary — Online notary services platform (in development)
