@@ -59,26 +59,20 @@ export default function Intro() {
         </motion.div>
       </div>
 
-      <div className="relative mx-auto mb-10 mt-6 max-w-[46rem] px-6 py-8 sm:px-10">
-        <div
-          className="absolute inset-0 -z-10 rounded-lg bg-paper/80 backdrop-blur-md lg:backdrop-blur-lg"
-          aria-hidden="true"
-        />
-        <h1 className="font-display text-3xl font-semibold !leading-[1.35] sm:text-5xl">
-          {headline.map((word, i) => (
-            <motion.span
-              key={i}
-              className="mr-[0.3em] inline-block"
-              custom={i}
-              variants={wordVariants}
-              initial="initial"
-              animate="animate"
-            >
-              {word}
-            </motion.span>
-          ))}
-        </h1>
-      </div>
+      <h1 className="mb-10 mt-6 px-4 font-display text-3xl font-semibold !leading-[1.35] sm:text-5xl">
+        {headline.map((word, i) => (
+          <motion.span
+            key={i}
+            className="mr-[0.3em] inline-block"
+            custom={i}
+            variants={wordVariants}
+            initial="initial"
+            animate="animate"
+          >
+            {word}
+          </motion.span>
+        ))}
+      </h1>
 
       <motion.div
         className="flex flex-col sm:flex-row items-center justify-center gap-3 px-4 text-base font-medium"

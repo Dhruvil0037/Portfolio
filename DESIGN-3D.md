@@ -1,5 +1,13 @@
 # 3D room scrollytelling — design notes
 
+> **Rebuilt v2** (this revision): a single "battlestation" hero scene — desk,
+> MacBook-style laptop, dual monitors, mechanical keyboard, desk lamp,
+> bookcase — using real CC0 low-poly models (Kenney's Furniture Kit,
+> kenney.nl, no attribution required but credited here) instead of hand-coded
+> primitives, viewed from six cinematic angles as you scroll. Split layout:
+> 3D pinned to one side, content scrolling on the other — no DOM/3D overlap.
+> See the bottom of this doc for what changed and why.
+
 Builds on `DESIGN.md` (type/color system). This layer adds an immersive 3D
 scene the camera moves through as the page scrolls, replacing the flat
 motion-only presentation with a real spatial narrative — desk, laptop,

@@ -46,6 +46,7 @@ export function createTextTexture(opts: TextTextureOptions) {
   });
 
   const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
   texture.needsUpdate = true;
   return texture;
 }
