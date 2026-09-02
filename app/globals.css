@@ -3,13 +3,36 @@
 @tailwind utilities;
 
 html {
-  --line-color: #e5e7eb;
+  --paper: #faf9f6;
+  --ink: #16130f;
+  --accent: #c2410c;
+  --line: rgba(22, 19, 15, 0.12);
+  --line-color: var(--line);
 }
 
 html.dark {
-  --line-color: rgba(255, 255, 255, 0.2);
+  --paper: #121110;
+  --ink: #f5f2ea;
+  --accent: #fb923c;
+  --line: rgba(245, 242, 234, 0.16);
+  --line-color: var(--line);
 }
 
-.borderBlack {
-  @apply border border-black/10;
+.borderInk {
+  @apply border border-line;
+}
+
+/* subtle grain texture over --paper, replaces the old blurred gradient blobs */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  pointer-events: none;
+  opacity: 0.35;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.section-index {
+  @apply font-mono text-xs tracking-widest uppercase text-accent;
 }

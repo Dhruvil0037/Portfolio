@@ -17,36 +17,48 @@ export default function Experience() {
 
   return (
     <section id="experience" ref={ref} className="scroll-mt-28 mb-28 sm:mb-40">
-      <SectionHeading>My experience</SectionHeading>
+      <SectionHeading index="05 — Experience">My experience</SectionHeading>
       <VerticalTimeline lineColor="">
         {experiencesData.map((item, index) => (
           <React.Fragment key={index}>
             <VerticalTimelineElement
               contentStyle={{
                 background:
-                  theme === "light" ? "#f3f4f6" : "rgba(255, 255, 255, 0.05)",
+                  theme === "light" ? "#f4f2ec" : "rgba(245, 242, 234, 0.05)",
                 boxShadow: "none",
-                border: "1px solid rgba(0, 0, 0, 0.05)",
+                border:
+                  theme === "light"
+                    ? "1px solid rgba(22, 19, 15, 0.12)"
+                    : "1px solid rgba(245, 242, 234, 0.16)",
+                borderRadius: "4px",
                 textAlign: "left",
                 padding: "1.3rem 2rem",
+                fontFamily: "var(--font-body)",
               }}
               contentArrowStyle={{
                 borderRight:
                   theme === "light"
-                    ? "0.4rem solid #9ca3af"
-                    : "0.4rem solid rgba(255, 255, 255, 0.5)",
+                    ? "0.4rem solid #c2410c"
+                    : "0.4rem solid #fb923c",
               }}
               date={item.date}
               icon={item.icon}
               iconStyle={{
                 background:
-                  theme === "light" ? "white" : "rgba(255, 255, 255, 0.15)",
+                  theme === "light" ? "#faf9f6" : "rgba(245, 242, 234, 0.1)",
+                border:
+                  theme === "light"
+                    ? "1px solid rgba(22, 19, 15, 0.12)"
+                    : "1px solid rgba(245, 242, 234, 0.16)",
+                boxShadow: "none",
                 fontSize: "1.5rem",
               }}
             >
-              <h3 className="font-semibold capitalize">{item.title}</h3>
-              <p className="font-normal !mt-0">{item.location}</p>
-              <p className="!mt-1 !font-normal text-gray-700 dark:text-white/75">
+              <h3 className="font-display font-semibold capitalize">
+                {item.title}
+              </h3>
+              <p className="font-mono text-sm !mt-1">{item.location}</p>
+              <p className="!mt-2 !font-normal text-ink/70">
                 {item.description}
               </p>
             </VerticalTimelineElement>

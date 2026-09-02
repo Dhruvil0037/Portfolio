@@ -48,18 +48,18 @@ export default function Contact() {
         once: true,
       }}
     >
-      <SectionHeading>Contact me</SectionHeading>
+      <SectionHeading index="06 — Contact">Contact me</SectionHeading>
 
-      <p className="text-gray-700 -mt-6 dark:text-white/80">
+      <p className="text-ink/70 -mt-6">
         Please contact me directly at{" "}
-        <a className="underline" href="mailto:dhruvildhamecha2003.com">
+        <a className="text-accent underline underline-offset-2" href="mailto:dhruvildhamecha2003.com">
           dhruvildhamecha2003@gmail.com
         </a>{" "}
         or through this form.
       </p>
 
       <form
-        className="mt-10 flex flex-col dark:text-black"
+        className="mt-10 flex flex-col"
         action={async (formDataObj) => {
           const { data, error } = await sendEmail(formDataObj);
 
@@ -73,7 +73,7 @@ export default function Contact() {
         }}
       >
         <input
-          className="h-14 px-4 rounded-lg borderBlack dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 transition-all dark:outline-none"
+          className="h-14 px-4 rounded borderInk bg-paper text-ink transition-all outline-none focus:border-accent"
           name="senderEmail"
           type="email"
           required
@@ -83,7 +83,7 @@ export default function Contact() {
           onChange={handleInputChange}
         />
         <textarea
-          className="h-52 my-3 rounded-lg borderBlack p-4 dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 transition-all dark:outline-none"
+          className="h-52 my-3 rounded borderInk bg-paper text-ink p-4 transition-all outline-none focus:border-accent"
           name="message"
           placeholder="Your message"
           required
