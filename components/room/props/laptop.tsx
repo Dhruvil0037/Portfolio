@@ -2,13 +2,14 @@
 
 import { useMemo, useState } from "react";
 import { RoundedBox } from "@react-three/drei";
-import * as THREE from "three";
 import { createBrushedMetalTexture } from "../textures";
 import { createTextTexture } from "../text-texture";
 import type { RoomPalette } from "../theme";
 
 const SITE_URL = "https://dhruvilportfolio.vercel.app";
 
+// Real-ish laptop proportions (13" body): ~0.30 wide x 0.21 deep base,
+// screen the same width, ~0.19 tall, thin bezel, opened to a natural angle.
 export default function Laptop({
   palette,
   position,
@@ -34,7 +35,7 @@ export default function Laptop({
         color: palette.paperColor,
         font: "600 22px Fraunces, serif",
         fontSize: 22,
-        padding: 26,
+        padding: 24,
         lines: [
           "dhruvilportfolio.vercel.app",
           "",
@@ -47,6 +48,10 @@ export default function Laptop({
       }),
     [palette.inkColor, palette.paperColor]
   );
+
+  const W = 0.3;
+  const D = 0.21;
+  const baseH = 0.01;
 
   return (
     <group
@@ -68,23 +73,40 @@ export default function Laptop({
       }}
     >
       {/* Base */}
-      <RoundedBox args={[0.34, 0.014, 0.24]} radius={0.012} smoothness={3} castShadow>
-        <meshStandardMaterial map={shellTex} roughness={0.35} metalness={0.7} />
+      <RoundedBox args={[W, baseH, D]} radius={0.006} smoothness={3} position={[0, baseH / 2, 0]} castShadow>
+        <meshStandardMaterial map={shellTex} roughness={0.35} metalness={0.65} />
       </RoundedBox>
-      {/* Keyboard deck hint */}
-      <mesh position={[0, 0.008, -0.01]} rotation={[-Math.PI / 2, 0, 0]}>
-        <planeGeometry args={[0.28, 0.16]} />
-        <meshStandardMaterial color={palette.metalColorDark} roughness={0.8} />
+      {/* Keyboard deck */}
+      <mesh position={[0, baseH + 0.001, -0.02]} rotation={[-Math.PI / 2, 0, 0]}>
+        <planeGeometry args={[W - 0.02, D - 0.05]} />
+        <meshStandardMaterial color={palette.metalColorDark} roughness={0.75} />
+      </mesh>
+      {/* Trackpad */}
+      <mesh position={[0, baseH + 0.0012, 0.07]} rotation={[-Math.PI / 2, 0, 0]}>
+        <planeGeometry args={[W * 0.4, D * 0.28]} />
+        <meshStandardMaterial color={palette.metalColor} roughness={0.4} metalness={0.3} />
       </mesh>
 
-      {/* Screen, hinged open */}
-      <group position={[0, 0.007, -0.115]} rotation={[-1.15, 0, 0]}>
-        <RoundedBox args={[0.34, 0.22, 0.012]} radius={0.012} smoothness={3} position={[0, 0.11, 0]} castShadow>
-          <meshStandardMaterial map={shellTex} roughness={0.35} metalness={0.7} />
+      {/* Screen, hinged at the back edge */}
+      <group position={[0, baseH, -D / 2]} rotation={[-1.22, 0, 0]}>
+        <RoundedBox
+          args={[W, D * 0.92, 0.008]}
+          radius={0.006}
+          smoothness={3}
+          position={[0, (D * 0.92) / 2, 0]}
+          castShadow
+        >
+          <meshStandardMaterial map={shellTex} roughness={0.35} metalness={0.65} />
         </RoundedBox>
-        <mesh position={[0, 0.11, 0.007]}>
-          <planeGeometry args={[0.3, 0.18]} />
+        {/* Bezel + display */}
+        <mesh position={[0, (D * 0.92) / 2, 0.0045]}>
+          <planeGeometry args={[W - 0.014, D * 0.92 - 0.014]} />
           <meshBasicMaterial map={screenTex} toneMapped={false} />
+        </mesh>
+        {/* Camera notch */}
+        <mesh position={[0, D * 0.92 - 0.006, 0.0046]}>
+          <circleGeometry args={[0.0018, 8]} />
+          <meshStandardMaterial color={palette.metalColorDark} />
         </mesh>
       </group>
     </group>

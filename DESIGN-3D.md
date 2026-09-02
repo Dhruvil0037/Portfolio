@@ -1,6 +1,30 @@
 # 3D room scrollytelling — design notes
 
-> **v3 rebuild** (current): a single procedurally-built desk scene — no
+> **v4 refinement** (current): desk composition redone to a real layout —
+> single monitor left + laptop right touching, keyboard/mouse centered on
+> an animated coding-themed deskmat, lamp on the right (click it to toggle
+> site light/dark mode — the whole lamp is the hit target, not just the
+> switch nub), spiral-bound interactive notebook (click cycles todo pages),
+> pencil, desk plant, chair pulled in close. Bookshelf rebuilt open-faced
+> (no solid front — was reading as "a coffin") with clickable/pull-out
+> books. Added big animated wall typography (dev quotes/memes), removed
+> the tablet prop per feedback. Laptop geometry rebuilt (previous version
+> had bad proportions/hinge). All the old flat-site paragraph sections
+> (`Intro`, `About`, `Skills`, `Experience`, `Contact` components) are
+> gone from this branch's `page.tsx` — replaced with short, room-specific
+> "chapter" captions in `chapters.tsx` sourced from `lib/data.ts` directly,
+> Kage-style, instead of forcing the old 2D site's full paragraphs into
+> overlay cards. The opening beat has no card at all now — just a small
+> non-blocking name/role mark, not a hero paragraph.
+>
+> Fixed a real interaction bug found while testing the lamp click: each
+> full-viewport-height `StationPanel` section (even the ones with no card,
+> like the opening beat) was intercepting pointer events across its entire
+> empty area, silently blocking clicks to the 3D scene underneath. Fixed
+> with `pointer-events-none` on the section wrapper and `pointer-events-auto`
+> only on the actual card content.
+>
+> **v3 rebuild**: a single procedurally-built desk scene — no
 > downloaded model packs of any kind. Desk, MacBook-style laptop, dual
 > monitors, mechanical keyboard, bookshelf with real titled books, wall
 > quote/experience frames, a desk robot toy, notebook/pens/tablet, a

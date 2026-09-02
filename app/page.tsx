@@ -1,31 +1,33 @@
-import About from "@/components/about";
-import Contact from "@/components/contact";
-import Experience from "@/components/experience";
-import Intro from "@/components/intro";
-import Projects from "@/components/projects";
-import Skills from "@/components/skills";
 import StationPanel from "@/components/room/station-panel";
+import {
+  HomeMark,
+  AboutChapter,
+  ProjectsChapter,
+  SkillsChapter,
+  ExperienceChapter,
+  ContactChapter,
+} from "@/components/room/chapters";
 
 export default function Home() {
   return (
     <main className="flex flex-col items-center">
-      <StationPanel>
-        <Intro />
+      <StationPanel id="home" sectionName="Home" align="start" bare>
+        <HomeMark />
       </StationPanel>
-      <StationPanel>
-        <About />
+      <StationPanel id="about" sectionName="About">
+        <AboutChapter />
       </StationPanel>
-      <StationPanel>
-        <Projects />
+      <StationPanel id="projects" sectionName="Projects">
+        <ProjectsChapter />
       </StationPanel>
-      <StationPanel>
-        <Skills />
+      <StationPanel id="skills" sectionName="Skills">
+        <SkillsChapter />
       </StationPanel>
-      <StationPanel>
-        <Experience />
+      <StationPanel id="experience" sectionName="Experience">
+        <ExperienceChapter />
       </StationPanel>
-      <StationPanel>
-        <Contact />
+      <StationPanel id="contact" sectionName="Contact">
+        <ContactChapter />
       </StationPanel>
     </main>
   );

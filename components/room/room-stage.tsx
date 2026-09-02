@@ -13,7 +13,7 @@ export default function RoomStage() {
   const [interactive, setInteractive] = useState(false);
   const [dpr, setDpr] = useState(1.5);
   const progressRef = useScrollProgress();
-  const { theme } = useTheme();
+  const { theme, toggleTheme } = useTheme();
   const palette = useMemo(() => getPalette(theme), [theme]);
 
   useEffect(() => {
@@ -36,7 +36,13 @@ export default function RoomStage() {
           toneMappingExposure: 1.05,
         }}
       >
-        <Scene progressRef={progressRef} interactive={interactive} palette={palette} theme={theme} />
+        <Scene
+          progressRef={progressRef}
+          interactive={interactive}
+          palette={palette}
+          theme={theme}
+          onToggleTheme={toggleTheme}
+        />
       </Canvas>
     </div>
   );

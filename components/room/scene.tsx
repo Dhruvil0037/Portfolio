@@ -9,18 +9,25 @@ import RoomShell from "./room-shell";
 import Desk from "./props/desk";
 import Laptop from "./props/laptop";
 import Monitor from "./props/monitor";
-import { Keyboard, ComputerMouse, Notebook, Tablet, DeskLamp, Mug } from "./props/desk-props";
+import {
+  Keyboard,
+  ComputerMouse,
+  MousePad,
+  SpiralNotebook,
+  Pencil,
+  DeskLamp,
+  Mug,
+} from "./props/desk-props";
 import Bookshelf from "./props/bookshelf";
 import Frame from "./props/frame";
+import { WallText } from "./props/wall-art";
 import RobotToy from "./props/robot-toy";
 import BalconyWindow from "./props/window";
 import Chair from "./props/chair";
 import Plant from "./props/plant";
 import type { RoomPalette } from "./theme";
 
-const bookTitles = skillsData
-  .filter((s) => !s.includes(" "))
-  .slice(0, 16);
+const bookTitles = skillsData.filter((s) => !s.includes(" ")).slice(0, 20);
 
 const experienceLines = experiencesData
   .slice()
@@ -32,11 +39,13 @@ export default function Scene({
   interactive,
   palette,
   theme,
+  onToggleTheme,
 }: {
   progressRef: MutableRefObject<number>;
   interactive: boolean;
   palette: RoomPalette;
   theme: "light" | "dark";
+  onToggleTheme: () => void;
 }) {
   return (
     <Suspense fallback={null}>
@@ -60,40 +69,47 @@ export default function Scene({
 
       <RoomShell palette={palette} />
 
-      <group position={[0, 0, 0.3]}>
+      {/* Desk top world span: x [-1.15, 1.15], z [-0.13, 0.93], y = 0.93 */}
+      <group position={[0, 0, 0.4]}>
         <Desk palette={palette} />
       </group>
 
-      <Laptop
-        palette={palette}
-        position={[-0.35, 0.933, 0.85]}
-        rotation={[0, 0.35, 0]}
-      />
-
       <Monitor
         palette={palette}
-        position={[0.12, 1.05, 0.3]}
-        rotation={[0, 0.22, 0]}
+        position={[-0.55, 1.05, 0.42]}
+        rotation={[0, 0.06, 0]}
         title="$ whoami --skills"
         lines={skillsData.slice(0, 8).map((s) => `> ${s}`)}
       />
-      <Monitor
+
+      <Laptop
         palette={palette}
-        position={[0.56, 1.05, 0.3]}
-        rotation={[0, -0.22, 0]}
-        title="MY PROJECTS"
-        lines={projectsData.slice(0, 6).map((p) => p.title)}
+        position={[-0.13, 0.933, 0.4]}
+        rotation={[0, -0.12, 0]}
       />
 
-      <Keyboard palette={palette} position={[-0.1, 0.933, 1.05]} rotation={[0, 0.05, 0]} />
-      <ComputerMouse palette={palette} position={[0.14, 0.933, 1.08]} rotation={[0, -0.3, 0]} />
-      <Notebook palette={palette} position={[0.88, 0.933, 0.95]} rotation={[0, -0.3, 0]} />
-      <Tablet palette={palette} position={[-0.85, 0.933, 0.9]} rotation={[-0.05, 0.25, 0]} />
-      <DeskLamp palette={palette} position={[1.05, 0.933, 0.05]} />
-      <Mug palette={palette} position={[-1.05, 0.955, 0.35]} />
-      <RobotToy palette={palette} position={[0.95, 0.933, 0.55]} />
+      <MousePad palette={palette} position={[-0.34, 0.936, 0.82]} />
+      <Keyboard palette={palette} position={[-0.44, 0.942, 0.82]} rotation={[0, 0.02, 0]} />
+      <ComputerMouse palette={palette} position={[-0.16, 0.942, 0.85]} rotation={[0, -0.2, 0]} />
 
-      <Chair palette={palette} position={[0, 0, 1.75]} rotation={[0, Math.PI, 0]} />
+      <DeskLamp
+        palette={palette}
+        position={[0.78, 0.933, 0.35]}
+        on={theme === "dark"}
+        onToggle={onToggleTheme}
+      />
+      <SpiralNotebook palette={palette} position={[0.72, 0.933, 0.68]} rotation={[0, 0.15, 0]} />
+      <Pencil
+        palette={palette}
+        position={[0.85, 0.945, 0.7]}
+        rotation={[Math.PI / 2, 0, 0.9]}
+      />
+
+      <Plant palette={palette} position={[-0.98, 0.933, 0.02]} />
+      <Mug palette={palette} position={[-0.9, 0.955, 0.32]} />
+      <RobotToy palette={palette} position={[0.98, 0.933, 0.75]} />
+
+      <Chair palette={palette} position={[0, 0, 1.25]} rotation={[0, Math.PI, 0]} />
 
       <Bookshelf
         palette={palette}
@@ -102,29 +118,53 @@ export default function Scene({
         titles={bookTitles}
       />
 
+      {/* Real content, eye-level band */}
       <Frame
         palette={palette}
         position={[-1.4, 2.1, -3.14]}
-        lines={['"Ship, then', 'sharpen."']}
-        accentBorder
-      />
-      <Frame
-        palette={palette}
-        position={[-0.5, 2.1, -3.14]}
         lines={experienceLines.slice(0, 4)}
       />
       <Frame
         palette={palette}
+        position={[-0.5, 2.1, -3.14]}
+        lines={experienceLines.slice(4, 8)}
+      />
+      <Frame
+        palette={palette}
         position={[0.4, 2.1, -3.14]}
-        lines={["// TODO:", "fix it in prod"]}
+        lines={['"Ship, then', 'sharpen."']}
+        accentBorder
+      />
+
+      {/* Big painted typography band, up high */}
+      <WallText
+        palette={palette}
+        position={[-1.3, 2.85, -3.15]}
+        size={[1.7, 0.75]}
+        text="Ship it"
+        sub="// works on my machine"
+        accent
+      />
+      <WallText
+        palette={palette}
+        position={[0.7, 2.85, -3.15]}
+        size={[1.6, 0.75]}
+        text="git commit"
+        sub="-m 'fix everything'"
+      />
+      <WallText
+        palette={palette}
+        position={[-3.9, 2.3, 0.6]}
+        rotation={[0, Math.PI / 2, 0]}
+        size={[1.4, 0.65]}
+        text="console.log"
       />
 
       <BalconyWindow palette={palette} position={[2.0, 1.9, -3.12]} theme={theme} />
 
       <Plant palette={palette} position={[1.9, 0, 0.9]} />
-      <Plant palette={palette} position={[-3.9, 0, 1.4]} />
 
-      <ContactShadows position={[0, 0.002, 0.3]} opacity={0.45} scale={7} blur={2.4} far={2} />
+      <ContactShadows position={[0, 0.002, 0.4]} opacity={0.45} scale={7} blur={2.4} far={2} />
 
       <CameraRig progressRef={progressRef} interactive={interactive} />
 
