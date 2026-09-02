@@ -18,7 +18,11 @@ const ThemeContext = createContext<ThemeContextType | null>(null);
 export default function ThemeContextProvider({
   children,
 }: ThemeContextProviderProps) {
-  const [theme, setTheme] = useState<Theme>("dark");
+  // Starts "light" to match the DOM's default (no .dark class until the
+  // effect below applies localStorage/media preference) — mismatching this
+  // meant consumers reading `theme` on first render (e.g. the 3D scene)
+  // saw "dark" while the page itself rendered light.
+  const [theme, setTheme] = useState<Theme>("light");
 
   const toggleTheme = () => {
     if (theme === "light") {

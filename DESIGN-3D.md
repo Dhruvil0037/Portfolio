@@ -1,59 +1,105 @@
 # 3D room scrollytelling — design notes
 
-> **Rebuilt v2** (this revision): a single "battlestation" hero scene — desk,
-> MacBook-style laptop, dual monitors, mechanical keyboard, desk lamp,
-> bookcase — using real CC0 low-poly models (Kenney's Furniture Kit,
-> kenney.nl, no attribution required but credited here) instead of hand-coded
-> primitives, viewed from six cinematic angles as you scroll. Split layout:
-> 3D pinned to one side, content scrolling on the other — no DOM/3D overlap.
-> See the bottom of this doc for what changed and why.
+> **v3 rebuild** (current): a single procedurally-built desk scene — no
+> downloaded model packs of any kind. Desk, MacBook-style laptop, dual
+> monitors, mechanical keyboard, bookshelf with real titled books, wall
+> quote/experience frames, a desk robot toy, notebook/pens/tablet, a
+> balcony window, a fabric-textured chair — all built from Three.js
+> primitives + procedurally generated canvas textures (wood grain, paper
+> grain, woven fabric, brushed metal, book spines), the same technique
+> threeui.com's own open-sourced components use for detail without high
+> poly counts. Full-bleed single-column layout (3D fixed behind everything,
+> content scrolls as fading "chapter" panels) replaces the earlier
+> split-screen. GSAP ScrollTrigger (synced with Lenis) drives the camera.
+> Light/dark theme swaps the room's whole material palette, not just page
+> chrome. See "v3 changes" at the bottom for the full list and why.
 
-Builds on `DESIGN.md` (type/color system). This layer adds an immersive 3D
-scene the camera moves through as the page scrolls, replacing the flat
-motion-only presentation with a real spatial narrative — desk, laptop,
-bookshelf, corkboard, whiteboard — one continuous room, six camera stations.
+Builds on `DESIGN.md` (type/color system).
 
 ## Stack
 
-- `three` + `@react-three/fiber` (R3F v8, React 18-compatible) + `@react-three/drei`
-  — the standard/official React Three.js ecosystem. No R3F v9 (requires React 19).
-- No GSAP: camera is driven by a plain scroll-progress ref (native `scroll`
-  listener, works fine under `lenis`'s smoothing) sampled in `useFrame`. Keeps
-  dependency surface minimal — Framer Motion and Lenis already cover motion.
-- Room geometry is hand-built from primitives (boxes, cylinders, planes) in a
-  stylized low-poly look using the existing `paper/ink/accent` palette as
-  material colors — not a downloaded asset pack. Full control, zero licensing
-  risk, and consistent with "distinctive over generic."
+- `three` + `@react-three/fiber` (R3F v8, React 18-compatible) + `@react-three/drei`.
+- `gsap` + `ScrollTrigger` drives the camera from scroll position — the
+  free (Webflow-acquired GreenSock, no paid tier anymore), code-first
+  standard for exactly this pattern. Synced with `lenis` per the documented
+  integration: `lenis.on("scroll", ScrollTrigger.update)` +
+  `gsap.ticker.add(time => lenis.raf(time * 1000))` (see `smooth-scroll.tsx`).
+- **No downloaded 3D assets.** Every prop is primitive geometry (`RoundedBox`,
+  boxes, cylinders, cones) plus a canvas-generated texture for surface detail
+  (see `components/room/textures.ts`) — wood grain, paper grain, fabric
+  weave, brushed metal, book spines with real titles. This is deliberate:
+  free, *detailed*, non-low-poly downloadable furniture/prop packs don't
+  really exist (checked Sketchfab, Poly Haven, itch.io — the free ones are
+  low-poly like Kenney's kit, which was tried and rejected; the detailed
+  ones are paid or require a logged-in browser download, not scriptable).
+  Procedural + generated-texture is threeui's own technique for their
+  bookshelf/cloth/paper components (their source is public on GitHub).
 
-## Camera stations (one per existing section, in scroll order)
+## Theme-aware materials
 
-1. **Home** — wide desk shot; laptop screen shows a mini live-site mock with a
-   "View live ↗" hotspot (`window.open` to the real deployed URL) — the
-   "access this site through the scene" ask.
-2. **About** — push toward a bookshelf / framed photo.
-3. **Projects** — pan to a corkboard wall of pinned project cards.
-4. **Skills** — turn to a second monitor covered in tech stickers.
-5. **Experience** — whiteboard with a timeline + a sticky-note cluster
-   doubling as the "current goals / task list / motivation quote" corner.
-6. **Contact** — desk phone / window view.
-- **CV** — a clipboard prop on the desk, clickable anywhere in the scene,
-  opens `/CV.pdf` in a new tab.
+`components/room/theme.ts` defines a full day and night `RoomPalette`
+(fog, walls, floor, desk wood tones, metal tones, accent, light colors/
+intensities, window sky gradient) keyed off the site's existing
+`ThemeContext`. `Scene` picks the palette live, so toggling light/dark
+changes the room's lighting and materials, not just the page chrome.
 
-Camera position/lookAt are lerped between station keyframes by scroll
-progress (segment-local t, smoothstep-eased), plus a small per-frame damping
-factor for buttery follow rather than 1:1 scroll-locked motion.
+## Camera stations
 
-## Content
+One per section, all orbiting/framing the *same* desk composition (not
+separate rooms): Home (wide establishing shot) → About (bookshelf close-in,
+real skill-named book spines) → Projects (dual monitors, real project
+titles) → Skills (keyboard/laptop close-up) → Experience (wall frames
+showing real experience-timeline text) → Contact (window/balcony, warm
+lamp corner). `stations.ts` holds the keyframes; `camera-rig.tsx` lerps
+between them by scroll progress, smoothstep-eased, with per-frame damping.
+In `prefers-reduced-motion`, the rig holds the Home framing with a very
+slight idle sway instead of scroll-locking.
 
-The six DOM sections (`Intro`, `About`, `Projects`, `Skills`, `Experience`,
-`Contact`) stay as the real content — accessible, SEO-indexable, source of
-truth. Each renders as a translucent `paper`-toned card so it reads over the
-3D scene when present, and reads fine as a normal card when it isn't.
+## Content is connected, not decorative
 
-## Fallback
+Every prop that shows text pulls from `lib/data.ts` — the bookshelf's book
+titles are real skill names, the monitors show real skills/projects, the
+wall frames show real experience-timeline entries. Nothing is a generic
+placeholder value.
 
-The 3D canvas is additive, not required: on narrow viewports (<1024px) or
-`prefers-reduced-motion: reduce`, it doesn't mount at all — content sections
-render as the flat, already-approved `redesign/2026-ui-refresh` layout.
-Desktop-capable, motion-OK visitors get the room; everyone else gets a fast,
-accessible page with identical content.
+## Layout
+
+Full-bleed: `RoomStage` is a `position: fixed` background canvas mounted
+once in `layout.tsx` (inside `ThemeContextProvider`, since it reads theme).
+Content sections render in normal document flow via `StationPanel`, which
+fades each section in/out as it enters/leaves view (`whileInView`, not
+`once: true`) so the room stays legible as the primary visual and text
+never permanently overlaps a busy focal object — replaces the earlier
+split-left/right-column approach.
+
+Known Chromium quirk hit and fixed: `backdrop-filter: blur()` on an element
+that also carries a Framer Motion transform, sitting over a WebGL canvas,
+blurs the panel's own text — not just what's behind it. `StationPanel`
+uses a fully opaque panel instead (no backdrop-blur) to avoid this.
+
+## Mobile
+
+No separate fallback tier — mobile gets the same full-bleed scroll-driven
+scene as desktop (gated only by `prefers-reduced-motion`, not viewport
+width), per feedback that mobile should get real effects too, not a static
+banner.
+
+## v3 changes (from the v2 battlestation rebuild)
+
+- Removed the Kenney low-poly asset pack entirely — replaced with
+  procedural geometry + generated textures.
+- Replaced flat glow-colored screens with real content (project/skill
+  text) rendered on properly-UV'd custom geometry (the low-poly pack's
+  meshes had degenerate UVs, which is why texture-mapping them failed
+  earlier — building the geometry ourselves fixes that at the root).
+- Replaced split-screen layout with full-bleed + fading chapter panels.
+- Added: bookshelf with real titled books, wall quote/experience frames,
+  a desk robot toy (clickable), notebook + pens, tablet, balcony window,
+  fabric-textured chair.
+- Added day/night material palette tied to the site's theme toggle.
+- Replaced the hand-rolled scroll listener with GSAP ScrollTrigger.
+- Fixed a real bug found along the way: `ThemeContext` initialized its
+  React state to `"dark"` while the DOM defaulted to light (no `.dark`
+  class until an effect ran), so anything reading `theme` on first render
+  — now including the 3D scene — saw the wrong value. Now initializes to
+  `"light"` to match the DOM default.

@@ -22,13 +22,13 @@ export default function Header() {
     <header className="z-[999] relative">
       {/* ── Desktop nav background ── */}
       <motion.div
-        className="hidden sm:block fixed top-6 left-1/2 md:left-3/4 h-[3.25rem] w-[min(36rem,90vw)] md:w-[26rem] rounded border border-line bg-paper/85 shadow-sm backdrop-blur-[0.5rem]"
+        className="hidden sm:block fixed top-6 left-1/2 h-[3.25rem] w-[min(36rem,90vw)] rounded border border-line bg-paper/85 shadow-sm backdrop-blur-[0.5rem]"
         initial={{ y: -100, x: "-50%", opacity: 0 }}
         animate={{ y: 0, x: "-50%", opacity: 1 }}
       />
 
       {/* ── Desktop nav links ── */}
-      <nav className="hidden sm:flex fixed top-[1.7rem] left-1/2 md:left-3/4 -translate-x-1/2 h-[initial] py-0">
+      <nav className="hidden sm:flex fixed top-[1.7rem] left-1/2 -translate-x-1/2 h-[initial] py-0">
         <ul className="flex items-center gap-5 font-mono text-[0.85rem] text-ink/60">
           {links.map((link) => (
             <motion.li

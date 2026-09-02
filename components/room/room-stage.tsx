@@ -1,38 +1,42 @@
 "use client";
 
 import { Canvas } from "@react-three/fiber";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import * as THREE from "three";
-import BattlestationScene from "./battlestation-scene";
+import Scene from "./scene";
 import { useScrollProgress } from "./use-scroll-progress";
+import { getPalette } from "./theme";
+import { useTheme } from "@/context/theme-context";
+import { stations } from "./stations";
 
 export default function RoomStage() {
   const [interactive, setInteractive] = useState(false);
   const [dpr, setDpr] = useState(1.5);
   const progressRef = useScrollProgress();
+  const { theme } = useTheme();
+  const palette = useMemo(() => getPalette(theme), [theme]);
 
   useEffect(() => {
-    const isDesktop = window.matchMedia("(min-width: 768px)").matches;
     const reducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
-    setInteractive(isDesktop && !reducedMotion);
-    setDpr(Math.min(window.devicePixelRatio || 1, isDesktop ? 2 : 1.5));
+    setInteractive(!reducedMotion);
+    setDpr(Math.min(window.devicePixelRatio || 1, 2));
   }, []);
 
   return (
-    <div className="h-[55vh] w-full md:sticky md:top-0 md:h-screen md:w-1/2">
+    <div className="fixed inset-0 -z-10" aria-hidden="true">
       <Canvas
         shadows
         dpr={dpr}
-        camera={{ position: [1.9, 1.25, 1.75], fov: 38, near: 0.05, far: 20 }}
+        camera={{ position: stations[0].position, fov: stations[0].fov, near: 0.05, far: 20 }}
         gl={{
           antialias: true,
           toneMapping: THREE.ACESFilmicToneMapping,
-          toneMappingExposure: 1.1,
+          toneMappingExposure: 1.05,
         }}
       >
-        <BattlestationScene progressRef={progressRef} interactive={interactive} />
+        <Scene progressRef={progressRef} interactive={interactive} palette={palette} theme={theme} />
       </Canvas>
     </div>
   );
