@@ -51,7 +51,10 @@ export default function About() {
           CI/CD, Docker, and deployment pipeline
         </span>{" "}
         (Vercel & VPS) plus database migrations for the products I build
-        solo, like Dayzen.
+        solo, like Dayzen — including its own{" "}
+        <span className="font-medium">central identity (CID) system</span>{" "}
+        unifying auth across modules, the way Google or Zoho run one
+        identity across their product suite.
       </p>
       <p>
         <span className="italic">When I&apos;m not coding</span>, I enjoy

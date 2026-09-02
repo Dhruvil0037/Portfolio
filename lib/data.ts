@@ -67,8 +67,8 @@ export const projectsData = [
   {
     title: "Dayzen",
     description:
-      "Solo-built HRMS + WMS combining Keka & Jira — attendance, payroll, leave, project tracking & warehouse ops. Full admin panel, CI/CD-driven deploys & schema migrations handled end-to-end solo. Under active development.",
-    tags: ["React", "Node.js", "Express", "MySQL", "Tailwind CSS", "Docker", "CI/CD"],
+      "Solo-built HRMS + WMS combining Keka & Jira — attendance, payroll, leave, project tracking & warehouse ops. Full admin panel with a central identity (CID) system unifying auth across modules, like Google or Zoho's account layer, plus schema migrations handled end-to-end solo. Under active development.",
+    tags: ["React", "Node.js", "Express", "MySQL", "Tailwind CSS", "Docker", "CID"],
     imageUrl: dayzen,
     link: "",
   },
@@ -168,6 +168,7 @@ export const skillsData = [
   "GitLab",
   "Docker",
   "CI/CD Pipelines",
+  "Central Identity (CID)",
   "Database Migrations",
   "Vercel",
   "VPS Deployment",
