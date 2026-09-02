@@ -9,6 +9,12 @@ import SmoothScroll from "@/components/smooth-scroll";
 import { Toaster } from "react-hot-toast";
 import type { Metadata } from "next";
 import { skillsData } from "@/lib/data";
+import dynamic from "next/dynamic";
+
+const RoomExperience = dynamic(
+  () => import("@/components/room/room-experience"),
+  { ssr: false }
+);
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -117,6 +123,7 @@ export default function RootLayout({
         className={`${fraunces.variable} ${plexSans.variable} ${plexMono.variable} font-body bg-paper text-ink relative pt-20 sm:pt-36 transition-colors`}
       >
         <div className="grain" aria-hidden="true"></div>
+        <RoomExperience />
         <SmoothScroll />
 
         <ThemeContextProvider>
